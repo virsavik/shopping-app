@@ -1,9 +1,9 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
-import { blue } from "@mui/material/colors";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
+import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
@@ -13,6 +13,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import HelpIcon from "@mui/icons-material/Help";
 import SearchIcon from "@mui/icons-material/Search";
+import { orange } from "@mui/material/colors";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,6 +59,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const StyledButton = styled(Button)(({ theme }) => ({
   color: "inherit",
   backgroundColor: "inherit",
+  fontSize: "0.8rem",
+  height: "1rem",
 }));
 
 export default function AppBar() {
@@ -67,7 +71,7 @@ export default function AppBar() {
         sx={{
           display: "flex",
           justifyContent: "center",
-          backgroundColor: blue[900],
+          backgroundColor: orange[900],
           color: "white",
           padding: 1,
         }}
@@ -77,26 +81,50 @@ export default function AppBar() {
           component="div"
           noWrap
           display={{ xs: "none", sm: "block" }}
+          sx={{ fontSize: "0.8rem" }}
         >
-          Lorem ipsum dolor sit amet.
+          Vào cửa hàng trên ứng dụng F8
         </Typography>
-        <Box width={{ xs: "20ch" }}></Box>
+        <Divider
+          orientation="vertical"
+          flexItem
+          sx={{
+            borderColor: "white",
+            marginLeft: 1,
+            marginRight: 1,
+          }}
+        />
+        <Typography
+          variant="body2"
+          component="div"
+          noWrap
+          display={{ xs: "none", sm: "block" }}
+          sx={{ fontSize: "0.8rem" }}
+        >
+          Kết nối
+        </Typography>
+        &nbsp;
+        <FontAwesomeIcon icon={["fab", "facebook"]} size="sm" />
+        &nbsp;
+        <FontAwesomeIcon icon={["fab", "instagram"]} size="sm" />
+        <Box width={{ xs: "none", md: "10ch" }}></Box>
         <Box>
-          <StyledButton size="small">
+          <StyledButton>
             <NotificationsIcon />
-            <Typography variant="caption" display={{ xs: "none", md: "block" }}>
-              Thông báo
-            </Typography>
+            <Typography variant="caption">Thông báo</Typography>
           </StyledButton>
-          <StyledButton size="small">
+          <StyledButton>
             <HelpIcon />
-            <Typography variant="caption" display={{ xs: "none", md: "block" }}>
-              Trợ giúp
-            </Typography>
+            <Typography variant="caption">Trợ giúp</Typography>
           </StyledButton>
         </Box>
       </Box>
-      <MuiAppBar position="static">
+      <MuiAppBar
+        position="static"
+        sx={{
+          backgroundColor: orange[800],
+        }}
+      >
         <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
           <Typography
             variant="h6"
