@@ -27,58 +27,55 @@ export default function Main() {
   }, []);
 
   return (
-    <Box component="div" mt={3}>
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          paddingX: 2,
-        }}
+    <Box
+      component="div"
+      mt={3}
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        paddingX: 5,
+      }}
+    >
+      <Box
+        width={{ xs: "100%", md: "25%" }}
+        marginBottom={{ xs: 2, md: 0 }}
+        marginRight={{ xs: 0, md: 2 }}
       >
-        <Grid item xs={12} md={3}>
-          <List sx={{ margin: 1, backgroundColor: grey[300] }}>
-            <ListItem disablePadding sx={{ backgroundColor: grey[400] }}>
-              <ListItemButton>
-                <ListItemIcon>
-                  <MenuIcon />
-                </ListItemIcon>
-                <ListItemText primary="Danh mục" />
-              </ListItemButton>
-            </ListItem>
-            {categoryList && categoryList.length > 0 ? (
-              categoryList.map((category) => (
-                <ListItem key={category.id}>
-                  <ListItemButton>
-                    <ListItemText primary={category.name} />
-                  </ListItemButton>
-                </ListItem>
-              ))
-            ) : (
-              <ListItem>
+        <List sx={{ backgroundColor: grey[300] }}>
+          <ListItem disablePadding sx={{ backgroundColor: grey[400] }}>
+            <ListItemButton>
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Danh mục" />
+            </ListItemButton>
+          </ListItem>
+          {categoryList && categoryList.length > 0 ? (
+            categoryList.map((category) => (
+              <ListItem key={category.id}>
                 <ListItemButton>
-                  <ListItemText primary="Không có danh mục nào" />
+                  <ListItemText primary={category.name} />
                 </ListItemButton>
               </ListItem>
-            )}
-          </List>
+            ))
+          ) : (
+            <ListItem>
+              <ListItemButton>
+                <ListItemText primary="Không có danh mục nào" />
+              </ListItemButton>
+            </ListItem>
+          )}
+        </List>
+      </Box>
+      <Box>
+        <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 10 }}>
+          {Array.from(productList).map((product, index) => (
+            <Grid item xs={4} sm={4} md={2} key={index}>
+              <ProductCard {...product} />
+            </Grid>
+          ))}
         </Grid>
-        <Grid item xs={12} md={9}>
-          <Grid
-            container
-            spacing={{ xs: 2 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
-            sx={{
-              margin: 1,
-            }}
-          >
-            {Array.from(productList).map((product, index) => (
-              <Grid item xs={2} sm={4} md={4} key={index}>
-                <ProductCard {...product} />
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 }
