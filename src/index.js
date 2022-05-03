@@ -5,8 +5,11 @@ import App from "./App";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import { getStore } from "./configs/store";
+import { loadIcon } from "./configs/load-icon";
 
 const store = getStore();
+
+loadIcon();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
