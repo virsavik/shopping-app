@@ -13,9 +13,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryList, getProductList } from "../reducers/product.reducer";
 import ProductCard from "../components/ProductCard";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 
 export default function Main() {
   const dispatch = useDispatch();
+  const { categoryId } = useParams();
+  const navigate = useNavigate();
 
   const loading = useSelector((state) => state.product.loading);
   const categoryList = useSelector((state) => state.product.categoryList);
@@ -23,8 +26,16 @@ export default function Main() {
 
   useEffect(() => {
     dispatch(getCategoryList());
-    dispatch(getProductList());
+    dispatch(getProductList(categoryId || 1));
   }, []);
+
+  useEffect(() => {
+    if (categoryId) {
+      dispatch(getProductList(categoryId));
+    } else {
+      navigate("/category/1");
+    }
+  }, [categoryId]);
 
   return (
     <Box
@@ -53,7 +64,20 @@ export default function Main() {
           {categoryList && categoryList.length > 0 ? (
             categoryList.map((category) => (
               <ListItem key={category.id}>
-                <ListItemButton>
+                <ListItemButton
+                  component={NavLink}
+                  to={"/category/" + category.id}
+                  style={({ isActive }) =>
+                    isActive
+                      ? {
+                          backgroundColor: grey[900],
+                          color: "white",
+                        }
+                      : {
+                          color: "inherit",
+                        }
+                  }
+                >
                   <ListItemText primary={category.name} />
                 </ListItemButton>
               </ListItem>

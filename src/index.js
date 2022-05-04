@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import { getStore } from "./configs/store";
 import { loadIcon } from "./configs/load-icon";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const store = getStore();
 
@@ -15,7 +16,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/category/:categoryId" element={<App />} />
+        </Routes>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
